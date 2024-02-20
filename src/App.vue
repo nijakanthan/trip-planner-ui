@@ -1,30 +1,59 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="wrapper">
+    <div class="navigation">
+      <div class="logo">
+        <img src="@/assets/logo.svg" alt="Logo">
+      </div>
+      <div class="nav-item">
+        <router-link to="/home" class="nav-link" router-link-active>Home</router-link>
+      </div>
+      <div class="nav-item">
+        <router-link to="/about" class="nav-link" router-link-active>About</router-link>
+      </div>
+    </div>
+    <div class="content">
+      <router-view/>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+div.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  div.logo {
+    display: flex;
+    img {
+      height: 50px;
+      margin: auto;
     }
+    margin-right: auto;
+  }
+  div.navigation {
+    flex: 0 0 70px;
+    background-color: #59b0a7;
+    box-shadow: 0px 5px 5px 0px rgb(83 83 83);
+    display: flex;
+    padding: 0 15px;
+    div.nav-item {
+      margin: auto 10px;
+      a.nav-link {
+        font-size: 25px;
+        text-decoration: none;
+        color: #FFFFFF;
+        padding: 0 20px;
+        &.router-link-active {
+          border: 2px solid #FFFFFF;
+          border-radius: 50px;
+        }
+      }
+    }
+  }
+  div.content {
+    flex: 1 1 auto;
+    display: flex;
+    background-color: rgba(255, 255,255, 0.5);
   }
 }
 </style>
