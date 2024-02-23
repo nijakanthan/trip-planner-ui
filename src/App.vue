@@ -18,7 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useCookies } from 'vue3-cookies'
 import { useUserStore } from '@/store/userStore'
 
@@ -27,6 +28,8 @@ const {
   setIsUserSignedIn,
   setSignedUser
 } = useUserStore()
+
+const { isUserSignedIn } = storeToRefs(useUserStore())
 
 
 onBeforeMount((): void => {
@@ -42,12 +45,14 @@ onBeforeMount((): void => {
     const userInfoObject = JSON.parse(atob(sessionValue!))
     setIsUserSignedIn(true)
     setSignedUser(userInfoObject)
-  } else {
-    console.log('User is not signed in')
-    window.location.href = '/auth/login'
   }
 })
 
+watch(isUserSignedIn, (newValue) => {
+  if (!newValue) {
+    window.location.href = '/auth/login'
+  }
+})
 </script>
 
 <style lang="scss">
