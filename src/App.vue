@@ -18,11 +18,27 @@
                   </template>
                 </el-menu-item>
               </router-link>
-              <router-link to="/about" class="nav-link" router-link-active>
+              <router-link to="/settings" class="nav-link" router-link-active>
                 <el-menu-item index="2">
+                  <template #title>
+                    <el-icon><Tools /></el-icon>
+                    Settings
+                  </template>
+                </el-menu-item>
+              </router-link>
+              <router-link to="/about" class="nav-link" router-link-active>
+                <el-menu-item index="3">
                   <template #title>
                     <el-icon><StarFilled /></el-icon>
                     About
+                  </template>
+                </el-menu-item>
+              </router-link>
+              <router-link to="/contact" class="nav-link" router-link-active>
+                <el-menu-item index="4">
+                  <template #title>
+                    <el-icon><PhoneFilled /></el-icon>
+                    Contact Us
                   </template>
                 </el-menu-item>
               </router-link>
@@ -101,6 +117,7 @@ div.wrapper {
     flex: 1 1 auto;
     display: flex;
     background-color: rgba(255, 255,255, 0.5);
+    overflow: auto;
     .container {
       .el-aside {
         background: rgba(89, 176, 167, 0.7);
