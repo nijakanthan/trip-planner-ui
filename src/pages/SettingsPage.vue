@@ -5,14 +5,14 @@
     </div>
     <vr />
     <div class="value">
-      <el-form :model="settings" label-width="auto">
+      <el-form label-width="auto">
         <el-form-item label="Year">
           <el-select
-            v-model="settings.year"
+            v-model="selectedYear"
             placeholder="please select the year"
           >
             <el-option
-              v-for="year in availableYears"
+              v-for="year in appSupportYears"
               :key="year"
               :label="year"
               :value="year" />
@@ -20,18 +20,18 @@
         </el-form-item>
         <el-form-item label="Country">
           <el-select
-            v-model="settings.countryCode"
+            v-model="selectedCountry"
             placeholder="please select your country"
           >
             <el-option
-              v-for="country in countries"
+              v-for="country in appSupportCountries"
               :key="country.code"
               :label="country.name"
               :value="country.code" />
           </el-select>
         </el-form-item>
         <el-form-item label="Preferred day">
-          <el-radio-group v-model="settings.preferredDay">
+          <el-radio-group v-model="selectedPreferredDay">
             <el-radio label="Friday" value="FRI" />
             <el-radio label="Monday" value="MON" />
           </el-radio-group>
@@ -42,36 +42,32 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { onMounted } from 'vue'
+import { useSettingsStore } from '@/store/settingsStore'
+import { getAppSupportCountries } from '@/apis/get-countries'
 
-const availableYears = [
+const {
+  selectedYear,
+  selectedCountry,
+  selectedPreferredDay,
+  appSupportCountries,
+  setYear,
+  setCountry,
+  setPreferredDay,
+  setAppSupportCountries
+} = useSettingsStore()
+
+const appSupportYears = [
   2024,
 ]
 
-const countries = [
-  {
-    name: 'Sri Lanka',
-    code: 'LK'
-  },
-  {
-    name: 'United States',
-    code: 'US'
-  },
-  {
-    name: 'India',
-    code: 'IN'
-  },
-  {
-    name: 'Japan',
-    code: 'JP'
+onMounted(async (): Promise<void> => {
+  const response = (await getAppSupportCountries()).data
+  if (response && response.countries) {
+    setAppSupportCountries(response.countries)
   }
-]
-
-const settings = reactive({
-  year: 2024,
-  countryCode: 'LK',
-  preferredDay: 'FRI',
 })
+
 </script>
 
 <style lang="scss"></style>
