@@ -6,6 +6,18 @@
     <vr />
     <div class="value">
       <el-form :model="settings" label-width="auto">
+        <el-form-item label="Year">
+          <el-select
+            v-model="settings.year"
+            placeholder="please select the year"
+          >
+            <el-option
+              v-for="year in availableYears"
+              :key="year"
+              :label="year"
+              :value="year" />
+          </el-select>
+        </el-form-item>
         <el-form-item label="Country">
           <el-select
             v-model="settings.countryCode"
@@ -13,9 +25,9 @@
           >
             <el-option
               v-for="country in countries"
-              :key="country.value"
-              :label="country.label"
-              :value="country.value" />
+              :key="country.code"
+              :label="country.name"
+              :value="country.code" />
           </el-select>
         </el-form-item>
         <el-form-item label="Preferred day">
@@ -32,27 +44,32 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
+const availableYears = [
+  2024,
+]
+
 const countries = [
   {
-    label: 'Sri Lanka',
-    value: 'SL'
+    name: 'Sri Lanka',
+    code: 'LK'
   },
   {
-    label: 'United States',
-    value: 'US'
+    name: 'United States',
+    code: 'US'
   },
   {
-    label: 'India',
-    value: 'IN'
+    name: 'India',
+    code: 'IN'
   },
   {
-    label: 'Japan',
-    value: 'JP'
+    name: 'Japan',
+    code: 'JP'
   }
 ]
 
 const settings = reactive({
-  countryCode: 'SL',
+  year: 2024,
+  countryCode: 'LK',
   preferredDay: 'FRI',
 })
 </script>
