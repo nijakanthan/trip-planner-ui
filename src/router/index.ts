@@ -25,8 +25,13 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/pages/ContactPage.vue')
   },
   {
+    path: '/loading',
+    name: 'loading',
+    component: () => import('@/pages/LoadingPage.vue')
+  },
+  {
     path: '',
-    redirect: 'home'
+    redirect: 'loading'
   }
 ]
 
@@ -40,11 +45,9 @@ router.beforeEach((to, from) => {
     const userInfo = cookies.get('userinfo')
     sessionStorage.setItem('userinfo', userInfo)
     cookies.remove('userinfo')
-    // const userInfoObject = JSON.parse(atob(userInfo))
     return true
   } else if (sessionStorage.getItem('userinfo')) {
     const sessionValue = sessionStorage.getItem('userinfo')
-    // const userInfoObject = JSON.parse(atob(sessionValue!))
     return true
   } else {
     window.location.href = '/auth/login'
