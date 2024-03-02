@@ -1,9 +1,9 @@
 declare global {
   interface Window {
-    configs: {
+    config: {
       apiUrl: string;
     };
   }
 }
 
-export const apiUrl = window?.configs?.apiUrl ? window.configs.apiUrl : '/'
+export const apiUrl = window?.config?.apiUrl ? window.config.apiUrl : '/'
