@@ -7,6 +7,6 @@ export async function getAppVersion() {
     method: 'GET',
   }
 
-  const response = await axios(`${apiUrl}/version`, options)
+  const response = await axios(`${apiUrl}/api/version`, options)
   return response as AxiosResponse<Version>
 }
