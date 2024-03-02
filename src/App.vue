@@ -4,6 +4,9 @@
       <div class="logo">
         <img src="@/assets/logo.svg" alt="Logo">
       </div>
+      <div class="version">
+        <span>{{ versionObject?.version }}</span>
+      </div>
     </div>
     <div class="content">
       <el-container class="container">
@@ -54,17 +57,16 @@
 </template>
 
 <script lang="ts" setup>
-// import { watch } from 'vue'
-// import { storeToRefs } from 'pinia'
-// import { useUserStore } from '@/store/userStore'
+import { onMounted, ref } from 'vue'
+import { Version } from '@/apis/interfaces'
+import { getAppVersion } from '@/apis/get-version'
 
-// const { isUserSignedIn } = storeToRefs(useUserStore())
+const versionObject = ref<Version | undefined>(undefined)
 
-// watch(isUserSignedIn, (newValue) => {
-//   if (!newValue) {
-//     window.location.href = '/auth/login'
-//   }
-// })
+onMounted(async (): Promise<void> => {
+  versionObject.value = (await getAppVersion()).data
+})
+
 </script>
 
 <style lang="scss">
@@ -87,6 +89,14 @@ div.wrapper {
         margin: auto;
       }
       margin-right: auto;
+    }
+    div.version {
+      display: flex;
+      span {
+        margin: auto;
+        font-size: 24px;
+        color: #FFFFFF;
+      }
     }
   }
   div.content {
