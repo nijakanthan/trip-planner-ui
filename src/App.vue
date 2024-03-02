@@ -54,41 +54,17 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useCookies } from 'vue3-cookies'
-import { useUserStore } from '@/store/userStore'
+// import { watch } from 'vue'
+// import { storeToRefs } from 'pinia'
+// import { useUserStore } from '@/store/userStore'
 
-const { cookies } = useCookies()
-const {
-  setIsUserSignedIn,
-  setSignedUser
-} = useUserStore()
+// const { isUserSignedIn } = storeToRefs(useUserStore())
 
-const { isUserSignedIn } = storeToRefs(useUserStore())
-
-
-onBeforeMount((): void => {
-  if (cookies.get('userinfo')) {
-    const userInfo = cookies.get('userinfo')
-    sessionStorage.setItem('userinfo', userInfo)
-    cookies.remove('userinfo')
-    const userInfoObject = JSON.parse(atob(userInfo))
-    setIsUserSignedIn(true)
-    setSignedUser(userInfoObject)
-  } else if (sessionStorage.getItem('userinfo')) {
-    const sessionValue = sessionStorage.getItem('userinfo')
-    const userInfoObject = JSON.parse(atob(sessionValue!))
-    setIsUserSignedIn(true)
-    setSignedUser(userInfoObject)
-  }
-})
-
-watch(isUserSignedIn, (newValue) => {
-  if (!newValue) {
-    window.location.href = '/login'
-  }
-})
+// watch(isUserSignedIn, (newValue) => {
+//   if (!newValue) {
+//     window.location.href = '/auth/login'
+//   }
+// })
 </script>
 
 <style lang="scss">

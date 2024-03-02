@@ -13,8 +13,8 @@ import './styles.scss'
 export const pinia = createPinia()
 
 const app = createApp(App)
-  .use(router)
   .use(pinia)
+  .use(router)
   .use(ElementPlus)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
