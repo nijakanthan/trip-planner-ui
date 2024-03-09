@@ -3,7 +3,7 @@
     <div class="header">
       <p>About</p>
     </div>
-    <vr />
+    <div class="divider"></div>
     <div class="value"></div>
   </div>
 </template>

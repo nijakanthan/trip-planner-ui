@@ -10,3 +10,13 @@ export interface Country {
 export interface CountriesObject {
   countries: Array<Country>
 }
+
+export interface Holiday {
+  summary: string
+  date: string
+  catagories?: string[]
+}
+
+export interface HolidaysObject {
+  holidays: Holiday[]
+}

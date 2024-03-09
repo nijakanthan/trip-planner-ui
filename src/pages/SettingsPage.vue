@@ -3,12 +3,12 @@
     <div class="header">
       <p>Settings</p>
     </div>
-    <vr />
+    <div class="divider"></div>
     <div class="value">
       <el-form label-width="auto">
         <el-form-item label="Year">
           <el-select
-            v-model="selectedYear"
+            v-model="selectedYearValue"
             placeholder="please select the year"
             @change="onYearChange"
           >
@@ -33,13 +33,20 @@
           </el-select>
         </el-form-item>
         <el-form-item label="Preferred day">
-          <el-radio-group v-model="selectedPreferredDay" @change="onDayChange">
+          <el-radio-group v-model="selectedPreferredDayValue" @change="onDayChange">
             <el-radio label="Friday" value="FRI" />
             <el-radio label="Monday" value="MON" />
           </el-radio-group>
         </el-form-item>
       </el-form>
     </div>
+    <el-alert
+      v-if="toast.show"
+      :title="toast.title"
+      :type="toast.type"
+      :description="toast.description"
+      effect="dark">
+    </el-alert>
   </div>
 </template>
 
@@ -49,7 +56,17 @@ import { useSettingsStore } from '@/store/settingsStore'
 import { Country } from '@/apis/interfaces'
 import { getAppSupportCountries } from '@/apis/get-countries'
 
+interface Toast {
+  type: 'success' | 'warning' | 'info' | 'error'
+  title: string
+  description: string
+  show: boolean
+}
+
 const {
+  selectedYear,
+  selectedCountry,
+  selectedPreferredDay,
   setYear,
   setCountry,
   setPreferredDay,
@@ -61,29 +78,77 @@ const appSupportYears = [
 ]
 
 const selectedCountryCode = ref('')
-const selectedYear = ref('')
-const selectedPreferredDay = ref('')
+const selectedYearValue = ref('')
+const selectedPreferredDayValue = ref('')
 const appSupportCountries = ref<Country[] | undefined>(undefined)
+const toast = ref<Toast>({
+  show: false,
+  title: '',
+  description: '',
+  type: 'info',
+})
 
 onMounted(async (): Promise<void> => {
   const response = (await getAppSupportCountries()).data
+  if (selectedYear) {
+    selectedYearValue.value = selectedYear
+  }
+  if (selectedPreferredDay) {
+    selectedPreferredDayValue.value = selectedPreferredDay
+  }
   if (response && response.countries) {
     appSupportCountries.value = response.countries
     setAppSupportCountries(response.countries)
+    if (selectedCountry) {
+      selectedCountryCode.value = selectedCountry
+    }
   }
 })
 
 const onYearChange = () => {
-  setYear(selectedYear.value)
+  setYear(selectedYearValue.value)
+  showToast({
+    show: true,
+    title: 'Success',
+    type: 'success',
+    description: 'Year updated successfully'
+  })
 }
 
 const onCountryChange = () => {
   setCountry(selectedCountryCode.value)
+  showToast({
+    show: true,
+    title: 'Success',
+    type: 'success',
+    description: 'Country updated successfully'
+  })
 }
 
 const onDayChange = () => {
-  setPreferredDay(selectedPreferredDay.value)
+  setPreferredDay(selectedPreferredDayValue.value)
+  showToast({
+    show: true,
+    title: 'Success',
+    type: 'success',
+    description: 'Preferred day updated successfully'
+  })
+}
+
+const showToast = (value: Toast) => {
+  toast.value = value
+  setTimeout(() => {
+    toast.value.show = false
+  }, 3000)
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.el-alert {
+  position: absolute;
+  z-index: 9;
+  width: 300px;
+  top: 20px;
+  right: 20px;
+}
+</style>

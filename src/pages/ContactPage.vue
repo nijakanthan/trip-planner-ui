@@ -3,7 +3,7 @@
     <div class="header">
       <p>Contact Us</p>
     </div>
-    <vr />
+    <div class="divider"></div>
     <div class="value"></div>
   </div>
 </template>
