@@ -6,6 +6,7 @@
       </div>
       <div class="version">
         <span>{{ versionObject?.version }}</span>
+        <span>Bal - {{ versionObjectBal }}</span>
       </div>
     </div>
     <div class="content">
@@ -59,12 +60,14 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { Version } from '@/apis/interfaces'
-import { getAppVersion } from '@/apis/get-version'
+import { getAppVersion, getAppVersionBal } from '@/apis/get-version'
 
 const versionObject = ref<Version | undefined>(undefined)
+const versionObjectBal = ref<string | undefined>(undefined)
 
 onMounted(async (): Promise<void> => {
   versionObject.value = (await getAppVersion()).data
+  versionObjectBal.value = (await getAppVersionBal()).data
 })
 
 </script>
