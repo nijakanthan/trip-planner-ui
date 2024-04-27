@@ -45,7 +45,6 @@ const {
   selectedYear
 } = useSettingsStore()
 const {
-  holidays,
   setHolidays
 } = useHolidaysStore()
 

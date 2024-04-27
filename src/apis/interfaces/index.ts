@@ -20,3 +20,8 @@ export interface Holiday {
 export interface HolidaysObject {
   holidays: Holiday[]
 }
+
+export interface Department {
+  id: string
+  name: string
+}
