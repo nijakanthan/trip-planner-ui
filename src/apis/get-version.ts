@@ -17,5 +17,5 @@ export async function getAppVersionBal() {
   }
 
   const response = await axios(`${balApiUrl}/app_version`, options)
-  return response as AxiosResponse<string>
+  return response as AxiosResponse<Version>
 }

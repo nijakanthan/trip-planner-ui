@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { apiUrl } from './constant'
+import { balApiUrl } from './constant'
 import { HolidaysObject } from './interfaces'
 
 export async function getHolidays(countryCode: string, year: string) {
@@ -7,6 +7,6 @@ export async function getHolidays(countryCode: string, year: string) {
     method: 'GET',
   }
 
-  const response = await axios(`${apiUrl}/holidays/${countryCode}/${year}`, options)
+  const response = await axios(`${balApiUrl}/holidays/${countryCode}/${year}`, options)
   return response as AxiosResponse<HolidaysObject>
 }

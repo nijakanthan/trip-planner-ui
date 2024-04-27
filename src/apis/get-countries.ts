@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { apiUrl } from './constant'
+import { balApiUrl } from './constant'
 import { CountriesObject } from './interfaces'
 
 export async function getAppSupportCountries() {
@@ -7,6 +7,6 @@ export async function getAppSupportCountries() {
     method: 'GET',
   }
 
-  const response = await axios(`${apiUrl}/countries`, options)
+  const response = await axios(`${balApiUrl}/countries`, options)
   return response as AxiosResponse<CountriesObject>
 }

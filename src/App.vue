@@ -5,7 +5,6 @@
         <img src="@/assets/logo.svg" alt="Logo">
       </div>
       <div class="version">
-        <span>{{ versionObject?.version }}</span>
         <span>Bal - {{ versionObjectBal }}</span>
       </div>
     </div>
@@ -60,13 +59,11 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { Version } from '@/apis/interfaces'
-import { getAppVersion, getAppVersionBal } from '@/apis/get-version'
+import { getAppVersionBal } from '@/apis/get-version'
 
-const versionObject = ref<Version | undefined>(undefined)
-const versionObjectBal = ref<string | undefined>(undefined)
+const versionObjectBal = ref<Version | undefined>(undefined)
 
 onMounted(async (): Promise<void> => {
-  versionObject.value = (await getAppVersion()).data
   versionObjectBal.value = (await getAppVersionBal()).data
 })
 
