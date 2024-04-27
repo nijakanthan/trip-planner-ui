@@ -5,7 +5,7 @@
         <img src="@/assets/logo.svg" alt="Logo">
       </div>
       <div class="version">
-        <span>Bal - {{ versionObjectBal }}</span>
+        <span>{{ versionObjectBal?.version }}</span>
       </div>
     </div>
     <div class="content">

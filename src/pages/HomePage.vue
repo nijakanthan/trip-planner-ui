@@ -65,8 +65,8 @@ const getTableData = async (): Promise<void> => {
     const holidaysVal = (await getHolidays(selectedCountry, selectedYear)).data
     if (holidaysVal.holidays && holidaysVal.holidays.length !== 0) {
       setHolidays(holidaysVal.holidays)
-      if (holidays) {
-        tableData.value = [...holidays]
+      if (holidaysVal.holidays) {
+        tableData.value = [...holidaysVal.holidays]
       }
       noDataError.value = false
       noSettingsError.value = false
