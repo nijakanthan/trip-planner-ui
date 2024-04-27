@@ -6,7 +6,7 @@
       </div>
       <div class="version">
         <span>{{ versionObjectBal?.version }}</span>
-        <span>Department: {{ departmentObject?.name }}</span>
+        <span v-if="departmentObject">Department: {{ departmentObject?.name }}</span>
       </div>
     </div>
     <div class="content">
